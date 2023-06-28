@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "749208616331",
+    "project_id": "aboutfcseoul",
+    "storage_bucket": "aboutfcseoul.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:749208616331:android:3fcb0a8f738b272333838e",
+        "android_client_info": {
+          "package_name": "com.wovud.aboutfcseoul"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "749208616331-9dfrughicvvuqf9bvfqo9a6dr55s4uf2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBeJJ1_zMpgNMKkaGbfSikQwpzopA_c_yY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "749208616331-9dfrughicvvuqf9bvfqo9a6dr55s4uf2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
