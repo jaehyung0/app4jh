@@ -4,13 +4,27 @@ class Scoreboard extends StatelessWidget {
   final Map<String, dynamic> map;
   const Scoreboard({Key? key, required this.map}) : super(key: key);
 
-  // TODO: add state variables, methods and constructor params
+  String setScorerList(String scorer, String time) {
+    String rtn = "";
+    List<String> scorerList = scorer.split(';');
+    List<String> timeList = time.split(';');
+    for (int i = 0; i < scorerList.length; i++) {
+      if (i != 0) {
+        rtn += '\n';
+      }
+      rtn += '${scorerList[i]} - ${timeList[i]}';
+    }
+    return rtn;
+  }
+
   @override
   Widget build(BuildContext context) {
-    String hscore =
+    String hScorers = setScorerList(map['hscorer'], map['htime']);
+    String aScorers = setScorerList(map['ascorer'], map['atime']);
+    /* String hscore =
         map['hscorer'] == '' ? '' : '${map['hscorer']} - ${map['htime']}';
     String ascore =
-        map['ascorer'] == '' ? '' : '${map['ascorer']} - ${map['atime']}';
+        map['ascorer'] == '' ? '' : '${map['ascorer']} - ${map['atime']}';*/
     return Column(
       children: [
         Text(
@@ -59,7 +73,7 @@ class Scoreboard extends StatelessWidget {
           children: [
             Expanded(
                 child: Text(
-              hscore,
+              hScorers,
               textAlign: TextAlign.center,
               style: const TextStyle(
                   fontSize: 17,
@@ -68,7 +82,7 @@ class Scoreboard extends StatelessWidget {
             )),
             Expanded(
                 child: Text(
-              ascore,
+              aScorers,
               textAlign: TextAlign.center,
               style: const TextStyle(
                   fontSize: 17,

@@ -23,6 +23,25 @@ class _NewsState extends State<News> {
       child: SafeArea(
         child: Column(
           children: [
+            const SizedBox(height: 5),
+            StreamBuilder(
+              stream: FirebaseFirestore.instance
+                  .collection('ranking')
+                  .doc('rank')
+                  .snapshots(),
+              builder: (BuildContext context,
+                  AsyncSnapshot<DocumentSnapshot<Map<String, dynamic>>>
+                      snapshot) {
+                if (!snapshot.hasData) {
+                  return const Text('현재 순위 : ???');
+                } else {
+                  return Text(
+                    '현재 순위 : ${snapshot.data!.data()!['rank']}위',
+                    style: const TextStyle(fontSize: 20, color: Colors.amber),
+                  );
+                }
+              },
+            ),
             const Text('최근 경기',
                 style: TextStyle(fontSize: 30, color: Colors.white)),
             const SizedBox(height: 10),
@@ -49,10 +68,7 @@ class _NewsState extends State<News> {
                 },
               ),
             ),
-            const Padding(
-              padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
-              child: Divider(color: Colors.red, thickness: 2),
-            ),
+            const SizedBox(height: 15),
             SizedBox(
               height: 50,
               child: StreamBuilder(
@@ -102,13 +118,13 @@ class _NewsState extends State<News> {
                 },
               ),
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 15),
             GetBuilder<NewsController>(builder: (controller) {
               return FutureBuilder<Map<String, dynamic>>(
                 future: FcHttp.callApi(controller.keyword),
                 builder: (context, snapshot) {
                   if (!snapshot.hasData) {
-                    return const CircularProgressIndicator();
+                    return const Text('웹에서는 뉴스가 안나와 ㅠㅠ');
                   } else {
                     List<dynamic> list = snapshot.data!['items'];
                     return ListView.builder(
@@ -121,6 +137,7 @@ class _NewsState extends State<News> {
                           child: Padding(
                             padding: const EdgeInsets.all(10.0),
                             child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
                                   parse(list[index]['title'])

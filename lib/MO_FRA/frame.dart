@@ -1,7 +1,7 @@
 import 'package:aboutfcseoul/MO_ABT/about_kleague.dart';
 import 'package:aboutfcseoul/MO_NEW/news.dart';
 import 'package:aboutfcseoul/MO_SCH/schedule.dart';
-import 'package:aboutfcseoul/common/fc_http.dart';
+import 'package:aboutfcseoul/MO_SNG/song.dart';
 import 'package:flutter/material.dart';
 
 class Frame extends StatefulWidget {
@@ -17,7 +17,7 @@ class _FrameState extends State<Frame> with SingleTickerProviderStateMixin {
   @override
   void initState() {
     _tabController = TabController(
-      length: 3,
+      length: 4,
       vsync: this, //vsync에 this 형태로 전달해야 애니메이션이 정상 처리됨
     );
     super.initState();
@@ -43,7 +43,11 @@ class _FrameState extends State<Frame> with SingleTickerProviderStateMixin {
               Container(
                   height: 50,
                   alignment: Alignment.center,
-                  child: const Text('정보'))
+                  child: const Text('정보')),
+              Container(
+                  height: 50,
+                  alignment: Alignment.center,
+                  child: const Text('응원가'))
             ],
             indicator: const BoxDecoration(color: Color(0xffffd700)),
             labelColor: Colors.red, //선택된 Tab 의 label 색상
@@ -54,19 +58,24 @@ class _FrameState extends State<Frame> with SingleTickerProviderStateMixin {
               controller: _tabController,
               children: [
                 Container(
-                    color: Colors.green[200],
+                    color: Colors.black,
                     alignment: Alignment.center,
                     child: const News()),
                 Container(
-                    color: Colors.green[200],
+                    color: Colors.black,
                     alignment: Alignment.center,
                     padding: const EdgeInsets.all(12),
                     child: Schedule()),
                 Container(
-                    color: Colors.green[200],
+                    color: Colors.white,
                     alignment: Alignment.center,
                     padding: const EdgeInsets.all(12),
                     child: const AboutKleague()),
+                Container(
+                    color: Colors.black,
+                    alignment: Alignment.center,
+                    padding: const EdgeInsets.all(12),
+                    child: const Song()),
               ],
             ),
           )

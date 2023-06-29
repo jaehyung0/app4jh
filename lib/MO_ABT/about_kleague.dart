@@ -76,8 +76,40 @@ class AboutKleague extends StatelessWidget {
                         TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
                 SizedBox(height: 10),
                 Text(
-                  '대한축구협회가 주최하는 대한민국 최상위 컵 대회. 대한축구협회에 등록한 프로 구단과 세미프로 구단, 아마추어 구단이 참가한다.',
+                  '대한축구협회가 주최하는 대한민국 최상위 컵 대회. 대한축구협회에 등록한 프로 구단과 세미프로 구단, 아마추어 구단이 참가한다.\nK5리그의 아마추어 구단과 K3리그, K4리그의 세미프로 구단은 배분한 출전권에 따라 1~2라운드부터 참가하고 K리그2의 프로 구단은 2라운드부터, K리그1의 프로 구단은 3라운드부터, AFC 챔피언스 리그 출전 구단은 16강부터 참가한다.\nFA컵에서 우승하는 구단은 다음 시즌 AFC 챔피언스 리그 출전권을 부여 받는다',
                   style: TextStyle(fontSize: 15),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 10),
+          Container(
+            decoration: BoxDecoration(border: Border.all(color: Colors.black)),
+            padding: const EdgeInsets.all(10),
+            child: Column(
+              children: [
+                const Text('AFC 챔피언스 리그(ACL)',
+                    style:
+                        TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
+                const SizedBox(height: 10),
+                const Text(
+                  '2021년부터 참가 팀이 32개 팀에서 40개 팀으로 확대되었다. 2019년 AFC에서 2년마다 실시한 리그 평가에 따라 평가가 높은 리그의 동아시아 16개 팀, 서아시아 16개 팀에게 본선 진출 티켓을 배분하였다. 본선 진출 국가 수가 기존 최소 각 6개국에서 각 10개국으로 대폭 늘어났다. 챔피언스리그 본선에 동아시아와 서아시아가 각 본선 직행 16개팀과 플레이오프 통과팀 4팀이 참가한다.',
+                  style: TextStyle(fontSize: 15),
+                ),
+                const SizedBox(height: 5),
+                InkWell(
+                  onTap: () {
+                    launchUrl(Uri.parse(
+                        'https://namu.wiki/w/AFC%20%EC%B1%94%ED%94%BC%EC%96%B8%EC%8A%A4%20%EB%A6%AC%EA%B7%B8'));
+                  },
+                  child: Container(
+                    alignment: Alignment.topRight,
+                    child: const Text(
+                      '설명 페이지',
+                      textAlign: TextAlign.start,
+                      style: TextStyle(color: Colors.blue, fontSize: 14),
+                    ),
+                  ),
                 ),
               ],
             ),
