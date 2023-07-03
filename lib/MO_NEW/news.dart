@@ -124,7 +124,8 @@ class _NewsState extends State<News> {
                 future: FcHttp.callApi(controller.keyword),
                 builder: (context, snapshot) {
                   if (!snapshot.hasData) {
-                    return const Text('웹에서는 뉴스가 안나와 ㅠㅠ');
+                    return const Text('웹에서는 뉴스가 안나와 ㅠㅠ',
+                        style: TextStyle(color: Colors.white));
                   } else {
                     List<dynamic> list = snapshot.data!['items'];
                     return ListView.builder(

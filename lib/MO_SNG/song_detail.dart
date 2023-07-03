@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
@@ -21,15 +23,28 @@ class SongDetail extends StatefulWidget {
 }
 
 class _SongDetailState extends State<SongDetail> {
-  late YoutubePlayerController _controller =
+  late YoutubePlayerController _ycontroller =
       YoutubePlayerController(initialVideoId: 'a');
   late webyoutube.YoutubePlayerController _wcontroller =
       webyoutube.YoutubePlayerController();
   late String _id;
 
+  Future<void> check() async {
+    DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
+    final docParty = FirebaseFirestore.instance.collection('check').doc();
+
+    final info = await deviceInfo.deviceInfo;
+
+    String device = info.data.toString();
+    final json = {'id': device, 'date': DateTime.now(), 'check': '너'};
+    await docParty.set(json);
+  }
+
   @override
   void initState() {
     super.initState();
+    check();
+
     _id = YoutubePlayer.convertUrlToId(widget.url)!;
     if (GetPlatform.isWeb) {
       _wcontroller = webyoutube.YoutubePlayerController.fromVideoId(
@@ -41,7 +56,7 @@ class _SongDetailState extends State<SongDetail> {
         ),
       );
     } else {
-      _controller = YoutubePlayerController(
+      _ycontroller = YoutubePlayerController(
         initialVideoId: _id,
         flags: const YoutubePlayerFlags(
           mute: false,
@@ -58,9 +73,8 @@ class _SongDetailState extends State<SongDetail> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
-    _controller.dispose();
+    _ycontroller.dispose();
   }
 
   @override
@@ -77,7 +91,10 @@ class _SongDetailState extends State<SongDetail> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      player,
+                      SizedBox(
+                          width: Get.width,
+                          height: Get.width * 9 / 16,
+                          child: player),
                       const Text('설명',
                           style: TextStyle(
                               fontWeight: FontWeight.bold, fontSize: 22)),
@@ -105,7 +122,11 @@ class _SongDetailState extends State<SongDetail> {
             child: SafeArea(
               child: Column(
                 children: [
-                  YoutubePlayer(controller: _controller),
+                  SizedBox(
+                    width: Get.width,
+                    height: Get.width * 9 / 16,
+                    child: YoutubePlayer(controller: _ycontroller),
+                  ),
                   const Text('설명',
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 22)),
